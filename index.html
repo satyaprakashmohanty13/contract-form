@@ -25,9 +25,9 @@
       color: #ffd700; /* Gold color for headings */
     }
     .form-input {
-      background-color: rgba(43, 26, 69, 0.5); /* 50% transparent dark purple for inputs */
+      background-color: rgba(255, 255, 255, 0.5); /* 50% transparent white for inputs */
       border: 1px solid #4a2d73; /* Darker purple border */
-      color: #e0e0e0;
+      color: #1a0a2e; /* Dark text on light input background */
       padding: 0.75rem 1rem;
       border-radius: 0.5rem;
       transition: all 0.2s ease-in-out;
@@ -36,6 +36,10 @@
       outline: none;
       border-color: #a06cd5; /* Lighter purple on focus */
       box-shadow: 0 0 0 3px rgba(160, 108, 213, 0.5); /* Soft glow */
+    }
+    /* Placeholder color for transparent white inputs */
+    .form-input::placeholder {
+      color: rgba(26, 10, 46, 0.7); /* Darker, slightly transparent placeholder */
     }
     .custom-file-upload {
       display: inline-block;
@@ -74,52 +78,52 @@
 </head>
 <body class="min-h-screen flex items-center justify-center p-4">
 
-  <div class="bg-gradient-to-br from-[rgba(43,26,69,0.7)] to-[rgba(26,10,46,0.7)] p-8 md:p-12 rounded-xl shadow-2xl max-w-xl w-full border border-[#4a2d73]">
+  <div class="bg-gradient-to-br from-[rgba(255,255,255,0.7)] to-[rgba(255,255,255,0.7)] p-8 md:p-12 rounded-xl shadow-2xl max-w-xl w-full border border-[#4a2d73]">
     <div class="text-center mb-8">
       <!-- Royal Crown Icon -->
       <svg class="w-16 h-16 mx-auto text-[#ffd700] mb-4" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <path d="M22 10.5h-4.2l1.6-4.8c.2-.6-.1-1.2-.7-1.4-.6-.2-1.2.1-1.4.7L15.3 9H8.7L6.7 5c-.2-.6-.8-.9-1.4-.7-.6.2-.9.8-.7 1.4L6.2 10.5H2c-.6 0-1 .4-1 1s.4 1 1 1h4.2l-1.6 4.8c-.2.6.1 1.2.7 1.4.6.2 1.2-.1 1.4-.7L8.7 15h6.6l2 4.8c.2.6.8.9 1.4.7.6-.2.9-.8.7-1.4L17.8 12.5H22c.6 0 1-.4 1-1s-.4-1-1-1zM12 14.5c-1.4 0-2.5-1.1-2.5-2.5s1.1-2.5 2.5-2.5 2.5 1.1 2.5 2.5-1.1 2.5-2.5 2.5z"/>
       </svg>
-      <h2 class="text-4xl font-bold mb-2">Request Your Royal Website</h2>
-      <p class="text-gray-400 text-lg">Let us craft a digital masterpiece for you.</p>
+      <h2 class="text-4xl font-bold mb-2 text-[#1a0a2e]">Request Your Royal Website</h2>
+      <p class="text-gray-600 text-lg">Let us craft a digital masterpiece for you.</p>
     </div>
 
     <form id="websiteForm" class="space-y-6">
       <div>
-        <label for="name" class="block text-gray-300 text-sm font-medium mb-2">Your Name</label>
+        <label for="name" class="block text-gray-700 text-sm font-medium mb-2">Your Name</label>
         <div class="relative">
             <input type="text" name="name" id="name" placeholder="Enter your name" required class="form-input w-full pl-10">
             <!-- User Icon -->
-            <svg class="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <svg class="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-500" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
             </svg>
         </div>
       </div>
 
       <div>
-        <label for="email" class="block text-gray-300 text-sm font-medium mb-2">Your Email</label>
+        <label for="email" class="block text-gray-700 text-sm font-medium mb-2">Your Email</label>
         <div class="relative">
             <input type="email" name="email" id="email" placeholder="Enter your email" required class="form-input w-full pl-10">
             <!-- Email Icon -->
-            <svg class="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <svg class="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-500" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
             </svg>
         </div>
       </div>
 
       <div>
-        <label for="description" class="block text-gray-300 text-sm font-medium mb-2">Describe your website vision</label>
+        <label for="description" class="block text-gray-700 text-sm font-medium mb-2">Describe your website vision</label>
         <div class="relative">
             <textarea name="description" id="description" placeholder="Share your ideas, features, and desired aesthetics..." required rows="5" class="form-input w-full pl-10 resize-y"></textarea>
             <!-- Description Icon (Pencil) -->
-            <svg class="absolute left-3 top-3 w-5 h-5 text-gray-400" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <svg class="absolute left-3 top-3 w-5 h-5 text-gray-500" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/>
             </svg>
         </div>
       </div>
 
       <div>
-        <label for="fileUpload" class="block text-gray-300 text-sm font-medium mb-2">Upload Reference Files (Optional)</label>
+        <label for="fileUpload" class="block text-gray-700 text-sm font-medium mb-2">Upload Reference Files (Optional)</label>
         <input type="file" id="fileUpload" class="hidden">
         <label for="fileUpload" class="custom-file-upload">
             <!-- Upload Icon -->
@@ -128,7 +132,7 @@
             </svg>
             Choose File
         </label>
-        <span id="fileName" class="ml-3 text-gray-400 text-sm">No file chosen</span>
+        <span id="fileName" class="ml-3 text-gray-600 text-sm">No file chosen</span>
       </div>
 
       <button type="submit" class="submit-button w-full">
