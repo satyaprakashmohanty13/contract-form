@@ -8,6 +8,8 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Google Fonts: Playfair Display for headings, Inter for body -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+  <!-- reCAPTCHA API script -->
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
   <style>
     /* Custom styles for a royal dark theme */
     body {
@@ -27,7 +29,7 @@
     .form-input {
       background-color: rgba(255, 255, 255, 0.2); /* 80% transparent white for inputs (20% opacity) */
       border: 1px solid #4a2d73; /* Darker purple border */
-      color: #1a0a2e; /* Dark text on light input background */
+      color: #000000; /* Dark text on light input background */
       padding: 0.75rem 1rem;
       border-radius: 0.5rem;
       transition: all 0.2s ease-in-out;
@@ -83,7 +85,10 @@
       <!-- Royal Logo Image -->
       <img src="logo.webp" alt="Website Logo" class="w-24 h-24 mx-auto mb-4 rounded-full object-cover border-2 border-[#ffd700]">
       <h2 class="text-4xl font-bold mb-2 text-[#1a0a2e]">Request Your Royal Website</h2>
-      <p class="text-gray-600 text-lg">Let us craft a digital masterpiece for you.</p>
+      <p class="text-gray-600 text-lg">Get a custom website completely free, with full source code and end-to-end encryption for your files.
+        Fast, secure, and lag-free—plus quick support whenever you need it.
+
+.</p>
     </div>
 
     <form id="websiteForm" class="space-y-6">
@@ -133,6 +138,11 @@
         <span id="fileName" class="ml-3 text-gray-600 text-sm">No file chosen</span>
       </div>
 
+      <div class="flex justify-center mt-6">
+        <!-- Add your reCAPTCHA site key here -->
+        <div class="g-recaptcha" data-sitekey="6LeBnnQrAAAAAI05Gmmxe3T1nUuj3G-kZprk9eWw"></div>
+      </div>
+
       <button type="submit" class="submit-button w-full">
         Submit Royal Request
       </button>
@@ -167,6 +177,23 @@
       const description = form.description.value;
       const file = fileInput.files[0];
 
+      // Get reCAPTCHA response
+      const recaptchaResponse = grecaptcha.getResponse();
+
+      if (!recaptchaResponse) {
+        status.innerText = "Please complete the reCAPTCHA.";
+        status.classList.remove('text-[#ffd700]');
+        status.classList.add('text-red-500');
+        return; // Stop form submission if reCAPTCHA is not completed
+      }
+
+      // IMPORTANT: For secure reCAPTCHA, 'recaptchaResponse' MUST be sent to your
+      // server-side backend for verification against Google's reCAPTCHA API
+      // using your reCAPTCHA secret key.
+      // The current Google Apps Script setup (no-cors) cannot securely perform this verification.
+      console.log("reCAPTCHA Response Token:", recaptchaResponse);
+      // You would typically send this token along with other form data to your backend.
+
       let fileUrl = "No file";
 
       try {
@@ -193,11 +220,13 @@
         // Note: 'no-cors' mode means you won't be able to read the response from the Apps Script.
         // If you need to read the response, the Apps Script must be configured with CORS headers
         // allowing your domain, and you'd use 'cors' mode.
+        // For secure reCAPTCHA, you would also send the recaptchaResponse here
+        // and your Apps Script would need to verify it.
         await fetch("https://script.google.com/macros/s/AKfycbzNUk2YG1nNJd5iWviLHo8I8adTNCQgDR9FW9JnsEVf9Yk-DdunCEcOvRPlTfXMazDi/exec", {
           method: "POST",
-          mode: "no-cors", // This is important for Apps Script Web Apps when not handling CORS explicitly
+          mode: "no-cors",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ name, email, description, fileUrl }),
+          body: JSON.stringify({ name, email, description, fileUrl, recaptchaResponse }), // Added recaptchaResponse
         });
 
         status.innerText = "Your royal request has been submitted successfully!";
@@ -205,11 +234,13 @@
         status.classList.add('text-green-500'); // Green for success
         form.reset();
         fileNameSpan.textContent = "No file chosen"; // Reset file name display
+        grecaptcha.reset(); // Reset reCAPTCHA after successful submission
       } catch (error) {
         console.error("Submission error:", error);
         status.innerText = `Submission failed: ${error.message || 'Please try again.'}`;
         status.classList.remove('text-[#ffd700]');
         status.classList.add('text-red-500'); // Red for error
+        grecaptcha.reset(); // Reset reCAPTCHA on error
       }
     };
   </script>
