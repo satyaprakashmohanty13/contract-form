@@ -12,18 +12,16 @@
   <script src="https://www.google.com/recaptcha/api.js" async defer></script>
   <style>
     /* Custom styles for a royal dark theme */
-  body::before {
-    content: "";
-    position: fixed;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: url('background.webp') center center / cover no-repeat;
-    z-index: -1;
-  }
   body {
-    background-color: #1a0a2e; /* fallback color */
-    color: #e0e0e0;
-    font-family: 'Inter', sans-serif;
-  }
+      font-family: 'Inter', sans-serif;
+      background-color: #1a0a2e; /* Deep dark purple fallback background */
+      color: #e0e0e0; /* Light gray text for contrast */
+      background-image: url('background.webp'); /* Background image */
+      background-size: cover; /* Cover the entire viewport */
+      background-repeat: no-repeat; /* Do not repeat the image */
+      background-position: center center; /* Center the image */
+      background-attachment: fixed; /* Keep background fixed while scrolling */
+    }
     h2 {
       font-family: 'Playfair Display', serif;
       color: #ffd700; /* Gold color for headings */
